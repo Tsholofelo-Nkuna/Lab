@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab.DataAccessLayer.Interfaces
+namespace Lab.DataAccessLayer.Interfaces.Json
 {
-    public interface ITestResultRepository : IJsonRepository<TestResultEntity, int>
+    public interface IRequisitionRepository : IJsonRepository<RequisitionEntity, int>
     {
     }
 }

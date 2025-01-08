@@ -1,14 +1,13 @@
 ﻿using Lab.DataAccessLayer.Entities;
-using Lab.DataAccessLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab.DataAccessLayer.Interfaces
+namespace Lab.DataAccessLayer.Interfaces.Json
 {
-    public interface ITestRepository: IJsonRepository<TestEntity, int>
+    public interface ITestResultRepository : IJsonRepository<TestResultEntity, int>
     {
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Lab.DataAccessLayer.Entities.Base;
-using Lab.DataAccessLayer.Interfaces;
+using Lab.DataAccessLayer.Interfaces.Json;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -8,24 +8,26 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Lab.DataAccessLayer.Repositories
+namespace Lab.DataAccessLayer.Repositories.Json
 {
     public class JsonRepository<TEntity> : IJsonRepository<TEntity, int> where TEntity : BaseEntity<int>
     {
         private string _jsonFilePath = string.Empty;
         public static object fileLock = new object();
-        public JsonRepository(IOptions<JsonRepositoryOptions<TEntity>> options) {
+        public JsonRepository(IOptions<JsonRepositoryOptions<TEntity>> options)
+        {
             _jsonFilePath = options.Value.FilePath;
-            if (options.Value.SeedData is List<TEntity> seedData) { 
-             var isInitialized = this.Init(seedData).Result;
+            if (options.Value.SeedData is List<TEntity> seedData)
+            {
+                var isInitialized = Init(seedData).Result;
             }
         }
 
-        public int InsertId 
-        { 
+        public int InsertId
+        {
             get
             {
-                return (this.Get(x => true).Result.Count() + 1);
+                return Get(x => true).Result.Count() + 1;
             }
         }
 
@@ -33,43 +35,45 @@ namespace Lab.DataAccessLayer.Repositories
         {
             if (File.Exists(_jsonFilePath))
             {
-                lock (fileLock) { 
-                    var jsonString =   File.ReadAllTextAsync(_jsonFilePath).Result;
-                    var records =  JsonSerializer.Deserialize<IEnumerable<TEntity>>(jsonString) ?? Enumerable.Empty<TEntity>();
-                    return  records.Where(predicate) ?? Enumerable.Empty<TEntity>();
+                lock (fileLock)
+                {
+                    var jsonString = File.ReadAllTextAsync(_jsonFilePath).Result;
+                    var records = JsonSerializer.Deserialize<IEnumerable<TEntity>>(jsonString) ?? Enumerable.Empty<TEntity>();
+                    return records.Where(predicate) ?? Enumerable.Empty<TEntity>();
                 }
             }
             else
             {
-                return  Enumerable.Empty<TEntity>();
+                return Enumerable.Empty<TEntity>();
             }
         }
 
         public async Task<IEnumerable<TEntity>> InsertBulk(List<TEntity> entities)
         {
-            var insertId = this.InsertId;
+            var insertId = InsertId;
             entities.ForEach(rec =>
             {
                 rec.Id = insertId;
                 insertId += 1;
             });
             var insertIdentifiers = entities.Select(rec => rec.Id);
-            lock (fileLock) {
+            lock (fileLock)
+            {
                 if (!File.Exists(_jsonFilePath))
                 {
-                   
-                  
+
+
                     File.AppendAllText(_jsonFilePath, JsonSerializer.Serialize(entities));
                 }
                 else
                 {
-                    var existingRecords = this.Get(x => true).Result.ToList();
+                    var existingRecords = Get(x => true).Result.ToList();
                     existingRecords.AddRange(entities);
                     File.WriteAllText(_jsonFilePath, JsonSerializer.Serialize(existingRecords));
                 }
             }
 
-            return  await this.Get(rec => insertIdentifiers.Contains(rec.Id));
+            return await Get(rec => insertIdentifiers.Contains(rec.Id));
         }
 
         public Task<TEntity?> GetById(int id)
@@ -78,7 +82,7 @@ namespace Lab.DataAccessLayer.Repositories
             {
                 lock (fileLock)
                 {
-                    return Task.FromResult(this.Get(x => x.Id == id).Result.FirstOrDefault());
+                    return Task.FromResult(Get(x => x.Id == id).Result.FirstOrDefault());
                 }
             }
             else
@@ -89,14 +93,15 @@ namespace Lab.DataAccessLayer.Repositories
 
         public async Task<IEnumerable<TEntity>> DeleteBulk(IEnumerable<int> identifiers)
         {
-            var deleted =  await this.Get(x => identifiers.Contains(x.Id));
-            var validRecords = this.Get(x => !identifiers.Contains(x.Id));
+            var deleted = await Get(x => identifiers.Contains(x.Id));
+            var validRecords = Get(x => !identifiers.Contains(x.Id));
             if (!File.Exists(_jsonFilePath))
             {
                 return Enumerable.Empty<TEntity>();
             }
-            lock (fileLock) {
-              File.WriteAllText(_jsonFilePath, JsonSerializer.Serialize(validRecords));
+            lock (fileLock)
+            {
+                File.WriteAllText(_jsonFilePath, JsonSerializer.Serialize(validRecords));
             }
             return deleted ?? Enumerable.Empty<TEntity>();
         }
@@ -108,10 +113,10 @@ namespace Lab.DataAccessLayer.Repositories
 
         public async Task<bool> Init(List<TEntity> seedData)
         {
-           var currentRepoContent =  await this.Get(rec => true);
+            var currentRepoContent = await Get(rec => true);
             if (currentRepoContent is IEnumerable<TEntity> repoContent && !repoContent.Any())
             {
-                var inserted = await this.InsertBulk(seedData);
+                var inserted = await InsertBulk(seedData);
                 return inserted.All(x => x.Id > 0) && inserted.Count() == seedData.Count();
             }
             else
