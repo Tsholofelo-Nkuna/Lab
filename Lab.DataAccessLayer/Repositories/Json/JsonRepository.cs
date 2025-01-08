@@ -106,9 +106,25 @@ namespace Lab.DataAccessLayer.Repositories.Json
             return deleted ?? Enumerable.Empty<TEntity>();
         }
 
-        public Task<IEnumerable<TEntity>> UpdateBulk(List<TEntity> updates)
+        public async Task<IEnumerable<TEntity>> UpdateBulk(List<TEntity> updates)
         {
-            throw new NotImplementedException();
+            var entitySet = await this.Get(x => true);
+            if(entitySet is IEnumerable<TEntity> validEntitySet)
+            {
+                var update = validEntitySet.Select(rec =>
+                {
+                    var updatedRec = updates.FirstOrDefault(up => up.Id == rec.Id);
+                    return updatedRec is not null ? updatedRec : rec;
+                });
+                lock (fileLock) {
+                    File.WriteAllText(_jsonFilePath, JsonSerializer.Serialize(update));
+                }
+                return await this.Get(x => updates.Select(rec => rec.Id).Contains(x.Id));
+            }
+            else
+            {
+                return Enumerable.Empty<TEntity> ();
+            }
         }
 
         public async Task<bool> Init(List<TEntity> seedData)
