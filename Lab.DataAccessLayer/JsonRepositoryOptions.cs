@@ -9,7 +9,7 @@ namespace Lab.DataAccessLayer
     public class JsonRepositoryOptions<TEntity>
     {
         public string FilePath { get; set; } = string.Empty;
-        public List<TEntity>? SeedData { get; set; };
+        public List<TEntity>? SeedData { get; set; }
 
     }
 }
