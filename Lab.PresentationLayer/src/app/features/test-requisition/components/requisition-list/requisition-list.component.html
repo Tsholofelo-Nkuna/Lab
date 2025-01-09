@@ -1,8 +1,22 @@
+<div class="app-px-2">
+  <h4>Requisitions</h4>
+</div>
 <div class="app-card app-my-2">
   <div class="app-card-header">
-    <a class="app-btn app-btn-primary">New</a>
+    <a class="app-btn app-btn-primary app-position-relative" (click)="config.showNewRequisitionModal=true">
+      New
+      <app-modal [contentTemplate]="modalContent"
+                 [(show)]="config.showNewRequisitionModal">
+
+      </app-modal>
+    </a>
   </div>
   <div class="app-card-body">
-    Hello World
+    <app-table [tableConfiguration]="requisitionTableConfig"></app-table>
   </div>
 </div>
+
+
+<ng-template #modalContent>
+ <div class="app-d-flex app-py-2" [style.font-weight]="'bold'">New Requisition</div>
+</ng-template>
