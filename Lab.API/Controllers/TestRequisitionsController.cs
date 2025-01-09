@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Lab.BusinessLogicLayer.Models.DataTransferObjects;
+using Lab.BusinessLogicLayer.Services;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,30 @@ namespace Lab.API.Controllers
     [ApiController]
     public class TestRequisitionsController : ControllerBase
     {
+        private readonly TestRequisitionService _testRequisitionService;
+        public TestRequisitionsController(TestRequisitionService testRequisitionService) { 
+           _testRequisitionService = testRequisitionService;
+        }
         // GET: api/<TestRequisitionsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ResponseDto<IEnumerable<RequisitionDto>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var response = new ResponseDto<IEnumerable<RequisitionDto>>()
+            {
+                Data = await _testRequisitionService.Get(x => true)
+            };
+            return response;
         }
 
-        // GET api/<TestRequisitionsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+      
         // POST api/<TestRequisitionsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ResponseDto<RequisitionDto?>> Post([FromBody] RequisitionDto value)
         {
-        }
-
-        // PUT api/<TestRequisitionsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<TestRequisitionsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var serviceResponse = await this._testRequisitionService.AddOrUpdate(new() { value });
+            return new ResponseDto<RequisitionDto?>() { 
+                Data = serviceResponse?.FirstOrDefault()
+            };
         }
     }
 }

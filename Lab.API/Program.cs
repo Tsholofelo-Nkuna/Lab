@@ -1,6 +1,9 @@
+using Lab.BusinessLogicLayer;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddLabBusinessServices(Path.Combine(AppDomain.CurrentDomain.BaseDirectory));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
