@@ -1,0 +1,9 @@
+<div class="app-modal app-position-absolute app-top-50 app-start-0" [class.app-show]="show" [class.app-hide]="!show">
+  <div class="app-d-flex app-py-1 app-px-2">
+    <ng-container *ngTemplateOutlet="contentTemplate;"></ng-container>
+  </div>
+  <div class="app-d-flex app-py-2 app-px-2 app-bg-tertiary">
+    <a class="app-btn app-btn-primary">Ok</a>
+    <a class="app-btn app-btn-secondary app-mx-1" (click)="onCancelClick($event)">Cancel</a>
+  </div>
+</div>
