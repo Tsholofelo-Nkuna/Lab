@@ -20,7 +20,7 @@ namespace Lab.BusinessLogicLayer.Services.Base
           this.primaryRepository = primaryRepo;
         }
 
-        public async Task<IEnumerable<TDto>> AddOrUpdate(List<TDto> records)
+        public virtual async Task<IEnumerable<TDto>> AddOrUpdate(List<TDto> records)
         {
             var updates = this.mapper.Map<List<TEntity>>( records.Where(rec => rec.Id > 0).ToList());
             var inserts = this.mapper.Map<List<TEntity>>(records.Where(rec => rec.Id == 0).ToList());
@@ -39,10 +39,17 @@ namespace Lab.BusinessLogicLayer.Services.Base
             return returnedResults;
         }
 
-        public async Task<bool> Delete(IEnumerable<int> identifiers)
+        public virtual async Task<bool> Delete(IEnumerable<int> identifiers)
         {
            var deleteResponse = await this.primaryRepository.DeleteBulk(identifiers);
             return deleteResponse.Count() == identifiers.Count();
+        }
+
+        public virtual async Task<IEnumerable<TDto>> Get(Func<TEntity, bool> filter)
+        {
+            var entityResult = await this.primaryRepository.Get(filter);
+            var returnedResult = this.mapper.Map<IEnumerable<TDto>>(entityResult ?? Enumerable.Empty<TEntity>());
+            return returnedResult;
         }
     }
 }

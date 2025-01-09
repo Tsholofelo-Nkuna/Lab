@@ -15,5 +15,6 @@ namespace Lab.BusinessLogicLayer.Interfaces
      
         Task<IEnumerable<TDto>> AddOrUpdate(List<TDto> records);
         Task<bool> Delete(IEnumerable<int> identifiers);
+        Task<IEnumerable<TDto>> Get(Func<TEntity, bool> filter);
     }
 }
