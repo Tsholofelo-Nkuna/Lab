@@ -1,4 +1,5 @@
-﻿using Lab.DataAccessLayer;
+﻿using Lab.BusinessLogicLayer.Services;
+using Lab.DataAccessLayer;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,9 @@ namespace Lab.BusinessLogicLayer
         {
             services.AddLabRepositories(fileStorageDirectoryPath);
             services.AddAutoMapper(typeof(MapperConfig));
+            services.AddScoped(typeof(TestRequisitionService));
+            services.AddScoped(typeof(TestResultService));
+            services.AddScoped(typeof(TestService));
             return services;
         }
     }
