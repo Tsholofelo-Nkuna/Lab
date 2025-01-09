@@ -1,0 +1,49 @@
+
+.app-layout{
+    display: grid;
+    grid-template-columns: 256px 1fr;
+    height: 100vh;
+    padding:0;
+    --taskbar-height: 3.5rem;
+}
+
+.app-logo {
+  height: var(--taskbar-height);
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 1px solid var(--app-secondary);
+  font-weight: 700;
+  padding-left: var(--app-padding-1)
+}
+
+.app-sidebar{
+    border-right: 1px solid var(--app-secondary);
+    display:flex;
+    flex-direction:column;
+    overflow-y:auto;
+    cursor:pointer;
+}
+
+.app-sidebar-item{
+    display: flex;
+    padding: var(--app-padding-2) 0;
+    border-bottom: 1px solid var(--app-secondary);
+    padding-left: var(--app-padding-1);
+    text-decoration:none;
+}
+.app-taskbar {
+  height: var(--taskbar-height);
+  background-color: var(--app-bg-body);
+  border-bottom: 1px solid var(--app-secondary);
+  display:flex;
+}
+.app-sidebar-item:hover{
+    background-color: var(--app-primary);
+    color: var(--app-white);
+}
+
+
+
+  .app-main-content {
+    position: relative;
+  }
