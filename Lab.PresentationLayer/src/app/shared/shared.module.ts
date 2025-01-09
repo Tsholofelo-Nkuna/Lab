@@ -1,17 +1,26 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { TableComponent } from "./components/table/table.component";
 import { TableConfig } from "./components/table/table.config";
+import { ModalComponent } from './components/modal/modal.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
-  CommonModule
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule
   ],
   declarations: [
-    TableComponent
+    TableComponent,
+    ModalComponent
   ],
   exports:[
-    TableComponent
+    TableComponent,
+    ModalComponent
+  ],
+  providers:[
+    DatePipe
   ]
 })
 export class SharedModule{

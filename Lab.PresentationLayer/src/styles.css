@@ -54,6 +54,16 @@ app-px-1 {
   padding-right: var(--app-padding-2) !important;
 }
 
+.app-mx-1{
+    margin-left: var(--app-margin-1);
+    margin-right: var(--app-margin-1);
+}
+
+.app-mx-2 {
+  margin-left: var(--app-margin-2);
+  margin-right: var(--app-margin-2);
+}
+
 .app-card {
   background-color: var(--app-white);
   border: 1px solid var(--app-secondary);
@@ -89,17 +99,34 @@ app-px-1 {
 }
 
 .app-btn-primary:active {
-  box-shadow: var(--app-primary) 0 0 8px;
+  box-shadow: var(--app-primary) 0 0 var(--app-margin-2);
 }
 
 .app-btn-primary{
    background-color: var(--app-primary);
    color: var(--app-white);
-  
 }
+
+.app-btn-secondary{
+    background-color: var(--app-secondary);
+    color: var(--app-white);
+}
+.app-btn-secondary:active {
+    box-shadow: var(--app-secondary) 0 0 var(--app-margin-2);
+  }
 
 .app-text-secondary{
     color: var(--app-secondary);
+}
+.app-text-center{
+    text-align:center
+}
+.app-text-end{
+    text-align:end;
+}
+
+.app-text-start{
+    text-align:start;
 }
 
 .app-position-stick-top {
@@ -111,9 +138,60 @@ app-px-1 {
 .app-position-relative{
     position: relative;
 }
+.app-position-fixed{
+    position:fixed;
+}
 
 .app-position-absolute{
     position: absolute;
+}
+.app-top-50{
+    top:50%;
+}
+.app-end-50{
+    right:50%;
+}
+.app-top-0 {
+  top: 0;
+}
+.app-start-0 {
+  left: 0;
+}
+
+.app-bg-secondary{
+    background-color: var(--app-secondary);
+}
+
+.app-bg-primary{
+    background-color: var(--app-primary);
+}
+
+.app-bg-tertiary{
+    background-color: var(--app-bg-body);
+}
+
+.app-show{
+    display:inline-block !important;
+}
+.app-hide{
+    display:none !important;
+}
+
+.app-d-flex{
+    display: flex;
+}
+.app-flex-column{
+    flex-direction: column;
+}
+.app-modal{
+   
+    min-width: 512px;
+    width: auto;
+    box-shadow: var(--app-secondary) 0 0 2px;
+    border-radius:var(--app-padding-2);
+    background-color: var(--app-white) !important;
+    color:black;
+    z-index:2;
 }
 
 body {
@@ -121,4 +199,17 @@ body {
   padding: 0;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--app-bg-body);
+}
+
+table{
+    width:100%;
+}
+
+table th, table td{
+    border-bottom: 1px solid var(--app-secondary);
+    padding: var(--app-padding-1) 0;
+}
+
+table{
+    border-collapse:collapse;
 }
