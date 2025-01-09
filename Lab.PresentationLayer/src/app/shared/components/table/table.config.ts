@@ -1,6 +1,7 @@
 export class TableConfig<TRecord>{
-  columnConfigurations: Array<TableColumnConfig<keyof(TRecord), object>>;
-  constructor(colConfig: Array<TableColumnConfig<keyof(TRecord), object>>){
+  columnConfigurations: Array<TableColumnConfig<keyof(TRecord), any>>;
+  data: Array<TRecord> = [];
+  constructor(colConfig: Array<TableColumnConfig<keyof(TRecord), any>>){
     this.columnConfigurations = colConfig;
     
   }
@@ -11,6 +12,6 @@ export class TableConfig<TRecord>{
 }
 
 export class TableColumnConfig<TKey, TValue>{
-  constructor(public key: TKey, value: TValue, label: string){}
+  constructor(public key: TKey, public value: TValue, public label: string){}
 
 }

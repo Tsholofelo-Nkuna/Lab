@@ -2,9 +2,18 @@
   <thead>
     <tr>
       <th *ngFor="let colConfig of tableConfiguration.columnConfigurations">
-        {{colConfig|json}}
+        {{colConfig.label}}
       </th>
     </tr>
   </thead>
-  <tbody></tbody>
+  <tbody>
+    <tr *ngIf="tableConfiguration.data.length === 0" class="app-py-2">
+      <td class="app-text-center" [attr.colspan]="tableConfiguration.columnConfigurations.length">No Data</td>
+    </tr>
+    <tr *ngFor="let rec of tableConfiguration.data">
+      <td *ngFor="let colConfig of tableConfiguration.columnConfigurations" class="app-text-center">
+        {{display(rec, colConfig.key)}}
+      </td>
+    </tr>
+  </tbody>
 </table>
