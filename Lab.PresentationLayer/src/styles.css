@@ -1,1 +1,124 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --app-bg-body: #eeeeee;
+  --app-primary: #8230b1;
+  --app-secondary: lightgray;
+  --app-white: white;
+  --app-padding-0: 0;
+  --app-padding-1: 0.5rem;
+  --app-padding-2: 1rem;
+  --app-padding-3: 1.5rem;
+  --app-padding-4: 2rem;
+  --app-padding-5: 2.5rem;
+  --app-margin-0: 0;
+  --app-margin-1: 0.5rem;
+  --app-margin-2: 1rem;
+  --app-margin-3: 1.5rem;
+  --app-margin-4: 2rem;
+  --app-margin-5: 2.5rem;
+}
+
+.app-active-primary {
+  background-color: var(--app-primary);
+  color: var(--app-white);
+}
+
+
+.app-my-1 {
+  margin-top: var(--app-margin-1) !important;
+  margin-bottom: var(--app-margin-1) !important;
+}
+
+.app-my-2 {
+  margin-top: var(--app-margin-2) !important;
+  margin-bottom: var(--app-margin-2) !important;
+}
+
+.app-py-1 {
+  padding-top: var(--app-padding-1) !important;
+  padding-bottom: var(--app-padding-1) !important;
+}
+
+.app-py-2 {
+  padding-top: var(--app-padding-2) !important;
+  padding-bottom: var(--app-padding-2) !important;
+}
+
+app-px-1 {
+  padding-left: var(--app-padding-1) !important;
+  padding-right: var(--app-padding-1) !important;
+}
+
+.app-px-2 {
+  padding-left: var(--app-padding-2) !important;
+  padding-right: var(--app-padding-2) !important;
+}
+
+.app-card {
+  background-color: var(--app-white);
+  border: 1px solid var(--app-secondary);
+  border-radius: var(--app-padding-1);
+  display: block;
+  margin: 0 var(--app-margin-2);
+  box-shadow: var(--app-secondary) 0 0 2px;
+}
+
+.app-card-header, .app-card-footer {
+  display: flex;
+  background-color: var(--app-bg-body);
+  padding: var(--app-padding-2)
+}
+.app-card-body {
+  padding: var(--app-padding-3) !important;
+}
+
+.app-text-primary{
+    color: var(--app-primary);
+}
+.app-text-white{
+    color: var(--app-white);
+}
+
+.app-btn {
+  padding: var(--app-padding-1) var(--app-padding-2);
+  justify-content: center;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.app-btn-primary:active {
+  box-shadow: var(--app-primary) 0 0 8px;
+}
+
+.app-btn-primary{
+   background-color: var(--app-primary);
+   color: var(--app-white);
+  
+}
+
+.app-text-secondary{
+    color: var(--app-secondary);
+}
+
+.app-position-stick-top {
+    position: sticky;
+    top:0;
+    z-index:1;
+}
+
+.app-position-relative{
+    position: relative;
+}
+
+.app-position-absolute{
+    position: absolute;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--app-bg-body);
+}
