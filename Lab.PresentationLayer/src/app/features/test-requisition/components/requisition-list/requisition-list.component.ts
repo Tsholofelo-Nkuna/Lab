@@ -30,9 +30,15 @@ export class RequisitionListComponent implements OnInit, AfterViewInit{
 
   getData(){
      this.requisitionTableConfig = this.config.tableConfig;
-     this.requisitionTableConfig.data = [
-      {age:0, firstName:"Tsholofelo",gender:"U", timeSampleTaken: new Date(),surname: "nkuna", mobileNumber:"762592125"}
-    ]
+     this.httpClient
+    .get<ResponseDto<RequisitionDto[]>>(`${this.configService.apiBaseUrl}/api/TestRequisitions`)
+    .subscribe(response => {
+       let data =  <Partial<RequisitionDto>[]>(response.data ?? []);
+       if(!!this.requisitionTableConfig){
+         this.requisitionTableConfig.data = data;
+       }
+    });
+    
   }
   onCreateNewRequisition(){
     var submittedRecord = this.config.newRequistionFormConfig.reduce((carry, next)=> ({...carry,[next.key]:next.value}), {})
