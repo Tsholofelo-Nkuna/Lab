@@ -18,7 +18,7 @@
 </div>
 
 <ng-template #modalContent>
-  {{config.newRequistionFormConfig | json}}
+  
   <div class="app-my-2" [style.font-weight]="'bold'">New Requisition</div>
   <div>
     <app-form-input *ngFor="let inputConfig of config.newRequistionFormConfig" [config]="inputConfig">

@@ -31,6 +31,7 @@ namespace Lab.BusinessLogicLayer.Services
                 {
                     var tests = ( _testRepository.Get(test => req.RequestedTestIdentifiers.Contains(test.Id))).Result.ToList();
                     req.RequestedTests = this.mapper.Map<List<TestDto>>( tests);
+                    req.RequestedTestsDescription = string.Join(", ", req.RequestedTests.Select(t => t.Description));
                     return req;
                 });
                 return returnedRequisitions;

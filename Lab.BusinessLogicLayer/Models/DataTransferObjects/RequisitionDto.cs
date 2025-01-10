@@ -19,5 +19,7 @@ namespace Lab.BusinessLogicLayer.Models.DataTransferObjects
         public string MobileNumber { get; set; } = string.Empty;
         public IEnumerable<int> RequestedTestIdentifiers { get; set; } = Enumerable.Empty<int>();
         public List<TestDto> RequestedTests { get; set; } = new();
+        public string RequestedTestId = string.Empty;
+        public string RequestedTestsDescription { get; set; } = string.Empty;
     }
 }

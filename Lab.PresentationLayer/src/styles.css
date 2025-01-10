@@ -3,6 +3,7 @@
   --app-bg-body: #eeeeee;
   --app-primary: #8230b1;
   --app-secondary: lightgray;
+  --app-danger: #b50505e6;
   --app-white: white;
   --app-padding-0: 0;
   --app-padding-1: 0.5rem;
@@ -84,6 +85,9 @@ app-px-1 {
 
 .app-text-primary{
     color: var(--app-primary);
+}
+.app-text-danger{
+    color: var(--app-danger);
 }
 .app-text-white{
     color: var(--app-white);

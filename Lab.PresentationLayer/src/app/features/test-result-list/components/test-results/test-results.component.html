@@ -1,0 +1,28 @@
+<div class="app-px-2">
+  <h4>Results</h4>
+</div>
+<div class="app-card app-my-2">
+  <div class="app-card-header">
+    <a class="app-btn app-btn-primary app-position-relative" (click)="config.showNewTestResultModal=true">
+      New
+      <app-modal [contentTemplate]="modalContent"
+                 [(show)]="config.showNewTestResultModal"
+                 (okClick)="onCreateNewTestResult()">
+
+      </app-modal>
+    </a>
+  </div>
+  <div class="app-card-body">
+    <app-table  [tableConfiguration]="config.testResultsTableConfig"></app-table>
+  </div>
+</div>
+
+<ng-template #modalContent>
+
+  <div class="app-my-2" [style.font-weight]="'bold'">New Requisition</div>
+  <div>
+    <app-form-input *ngFor="let inputConfig of config.newTestResultFormConfig" [config]="inputConfig">
+    </app-form-input>
+  </div>
+</ng-template>
+

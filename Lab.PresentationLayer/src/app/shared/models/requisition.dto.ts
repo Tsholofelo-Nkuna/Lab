@@ -12,4 +12,6 @@ export class RequisitionDto extends DtoBase<number>{
         mobileNumber = "";
         requestedTestIdentifiers: Array<number> = [];
         requestedTests : Array<TestDto> = [];
+        requestedTestId = "";
+        requestedTestsDescription = "";
 }
