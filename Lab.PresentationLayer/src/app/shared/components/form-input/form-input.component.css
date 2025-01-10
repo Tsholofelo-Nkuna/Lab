@@ -1,0 +1,6 @@
+.app-form-input{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--app-margin-1);
+    margin-bottom: var(--app-margin-1);
+}

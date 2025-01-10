@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -6,12 +6,14 @@ import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/co
   styleUrl: './modal.component.css'
 })
 export class ModalComponent {
-  @Input({required: true})
-  contentTemplate : TemplateRef<any> | null = null;
+ 
+  contentTemplate  = input<TemplateRef<any>>();
   @Input()
   show = false;
   @Output()
   showChange = new EventEmitter<boolean>();
+  @Output()
+  okClick = new EventEmitter();
 
   onCancelClick(e: Event){
     e.stopPropagation();

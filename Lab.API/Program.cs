@@ -3,6 +3,16 @@ using Lab.BusinessLogicLayer;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(config =>
+{
+    config.AddDefaultPolicy(options =>
+    {
+        options
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
 builder.Services.AddLabBusinessServices(Path.Combine(AppDomain.CurrentDomain.BaseDirectory));
 
 builder.Services.AddControllers();
@@ -18,7 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

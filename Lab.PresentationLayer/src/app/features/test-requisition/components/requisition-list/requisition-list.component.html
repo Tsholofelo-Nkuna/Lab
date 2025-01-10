@@ -6,17 +6,23 @@
     <a class="app-btn app-btn-primary app-position-relative" (click)="config.showNewRequisitionModal=true">
       New
       <app-modal [contentTemplate]="modalContent"
-                 [(show)]="config.showNewRequisitionModal">
+                 [(show)]="config.showNewRequisitionModal"
+                 (okClick)="onCreateNewRequisition()">
 
       </app-modal>
     </a>
   </div>
   <div class="app-card-body">
-    <app-table [tableConfiguration]="requisitionTableConfig"></app-table>
+    <app-table *ngIf="requisitionTableConfig" [tableConfiguration]="requisitionTableConfig"></app-table>
   </div>
 </div>
 
-
 <ng-template #modalContent>
- <div class="app-d-flex app-py-2" [style.font-weight]="'bold'">New Requisition</div>
+  {{config.newRequistionFormConfig | json}}
+  <div class="app-my-2" [style.font-weight]="'bold'">New Requisition</div>
+  <div>
+    <app-form-input *ngFor="let inputConfig of config.newRequistionFormConfig" [config]="inputConfig">
+    </app-form-input>
+  </div>
 </ng-template>
+

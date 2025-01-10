@@ -3,7 +3,7 @@ import { TestDto } from "./test.dto";
 
 export class RequisitionDto extends DtoBase<number>{
         requisitionId:string = "";
-        TimeSampleTaken?:Date;
+        timeSampleTaken?:Date;
         firstName = "";
         surname ="";
         gender : "M"|"F"|"U" = "U";

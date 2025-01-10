@@ -9,7 +9,7 @@ namespace Lab.BusinessLogicLayer.Models.DataTransferObjects
 {
     public class RequisitionDto : DtoBase<int>
     {
-        public string RequisitionId => $"{base.Id}:D4";
+        public string RequisitionId => $"{base.Id:D4}";
         public DateTime? TimeSampleTaken { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string Surname { get; set; } = string.Empty;

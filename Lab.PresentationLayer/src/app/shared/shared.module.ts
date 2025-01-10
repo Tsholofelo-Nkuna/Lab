@@ -4,23 +4,31 @@ import { TableComponent } from "./components/table/table.component";
 import { TableConfig } from "./components/table/table.config";
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormInputComponent } from './components/form-input/form-input.component';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   imports: [
   CommonModule,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  HttpClientModule
   ],
   declarations: [
     TableComponent,
-    ModalComponent
+    ModalComponent,
+    FormInputComponent
   ],
   exports:[
     TableComponent,
-    ModalComponent
+    ModalComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    FormInputComponent
   ],
   providers:[
-    DatePipe
+    DatePipe,
+    HttpClient
   ]
 })
 export class SharedModule{

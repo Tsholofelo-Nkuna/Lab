@@ -1,0 +1,22 @@
+<ng-container [ngSwitch]="config!.controlType">
+  <ng-container *ngSwitchCase="'text'">
+    <div class="app-form-input">
+      <label>{{config!.label}}</label>
+      <input name="{{config!.key.toString()}}" [(ngModel)]="config!.value" />
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'select'">
+    <div class="app-form-input">
+      <label>{{config!.label}}</label>
+      <select name="{{config!.key.toString()}}" [(ngModel)]="config!.value">
+        <option *ngFor="let op of config!.options" [value]="op.key" >{{op.value}}</option>
+      </select>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'date'">
+    <div class="app-form-input">
+      <label>{{config!.label}}</label>
+      <input name="{{config!.key.toString()}}" type="datetime" [(ngModel)]="config!.value" />
+    </div>
+  </ng-container>
+</ng-container>
